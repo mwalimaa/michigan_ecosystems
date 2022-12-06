@@ -48,13 +48,13 @@ Presented as an alternative to a PowerPoint presentation, we ([Myles Walimaa](ma
 
 Randy is an ecologist for The Nature Conservancy and I am a former National Park Service employee. We both work with the [Conservation Data Lab](https://conservationdatalab.org/) to mentor students in the art of computer coding and data visualization, particularly for conservation purposes.  
 
-As you explore, ask yourself some of these questions:  
+For all charts:
 
-* What is an "ecosystem" to you? How coarse or fine should we define these?  
-* What percentage of Michigan was/is covered by wetlands? How important are wetlands to you? What is their ecological value?  
-* How often do you think wildfires occurred historically? Can you think of any ecosystems that are fire dependent?  
-* Which ecosystems in Michigan have you seen? Are there any you would like to see?  
-* Are there any trends that you have noticed, based off the data presented?
+- The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
+
+- Use your mouse to zoom in on smaller areas by drawing a box.  
+
+- You can reset the zoom by clicking the "house" icon at the top left of the chart. 
 
 <font size = "3"> *PLEASE read the disclaimers on each slide explaining the assumptions with each dataset. This is meant for exploratory purposes only.*</font>  
   
@@ -114,6 +114,7 @@ ichart2
 
 ***
 **Observations and the dataset**
+
 Historically, Michigan was dominated by hardwood-dominated ecosystems, with a substantial showing of wetland  (refered to as "riparian" in the source data set) conifer and mixed hardwood-conifer types.
 
 This map was created using LANDFIRE's [Biophysical Settings](https://landfire.gov/bps.php). As there was no satellite imagery 300 years ago, this is a *model* of what the historical ecosystems looked like based soil types, climate, elevation, ecological succession, among many other datasets. The original data displayed plots of 30m x 30m squares that we call "pixels", and Michigan has over 500 million of them! 
@@ -128,7 +129,7 @@ Explore this map created by [Native Land Digital](https://native-land.ca/) to le
 
 - This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
 - 'Riparian' types include all wetlands.  
-- Download map of coarse ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/bps-gv-greasy.png)
+- Download map of coarse ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/bps-gv-greasy.png )
 
 
 
@@ -197,29 +198,22 @@ ichart3
 ```
 
 ***
+**Observations and the dataset**
 
-**DISCLAIMER:**  
-This chart was created using LANDFIRE's Existing Vegetation Type. This uses satellite imagery, ground assessment, and other methods to describe current "ecosystems" (or lack thereof). I grouped all the developed sub-categories into a single "Developed" classification.  
+This chart was created using LANDFIRE's [Existing Vegetation Type](https://landfire.gov/evt.php). This uses satellite imagery, ground assessment, and other methods to describe current "ecosystems" (or lack thereof).  The main pattern to note is the substantial amount of agricultural types on the landscape today.   
 
-- Existing Vegetation Type (EVT) has a "fine" scale classification called "EVT_NAME" and a "coarse" scale classification called "EVT_PHYS".  
 
-- The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
-
-- When you hover, you can see how many acres of each ecosystem exists (roughly).  
-
-- Use your mouse to zoom in on smaller areas by drawing a box.  
-
-- You can reset the zoom by clicking the "house" icon at the top left of the chart.  
+- Existing Vegetation Type (EVT) has a "fine" scale classification called "EVT_NAME" and a "coarse" scale classification called "EVT_PHYS".  The map and the chart are based on "EVT_PHYS"
 
 Does anything jump out to you as surprising?  
 
-Should "ruderal" ecosystems be classified as agriculture, exotic, or something else? Disturbed?  
-
 What do you notice about the historical and current ratios of conifers-to-hardwoods?  
 
-Again, this is *not* a perfect representation of today's conditions and is meant for scales of several thousand+ acres. If you want to explore the EVT dataset further, you can find [information here](https://www.landfire.gov/evt.php) and can read about its development. There is a nifty [handbook](https://www.landfire.gov/documents/LANDFIRE_Ecological_Systems_Descriptions_CONUS.pdf) that discusses each ecosystem classification in a fair amount of depth, so you may get a better idea of what you may find there.
+**DISCLAIMER:** 
 
+- Again, this is *not* a perfect representation of today's conditions and is meant for scales of several thousand+ acres. If you want to explore the EVT dataset further, you can find [information here](https://www.landfire.gov/evt.php) and can read about its development. There is a nifty [handbook](https://www.landfire.gov/documents/LANDFIRE_Ecological_Systems_Descriptions_CONUS.pdf) that discusses each ecosystem classification in a fair amount of depth, so you may get a better idea of what you may find there.
 
+- I grouped all the developed sub-categories into a single "Developed" classification.
 
 
 ### Exploring Change {data-commentary-width=500}
