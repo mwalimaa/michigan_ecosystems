@@ -44,7 +44,7 @@ tm_shape(shp) +
 ***
 <font size = "4"> Exploring Michigan's Ecosystems, Past and Present </font>  
 
-Presented as an alternative to a PowerPoint presentation, we ([Myles Walimaa](mailto:mwalimaa@gmail.com) and [Randy Swaty](mailto:rswaty@tnc.org) ) hope to orient you to Michigan's ecosystems as they were just prior to European Colonization and as of ~2020. This can certainly be built upon and these workflows may be used for any area of interest. The State of Michigan is the target area for this dashboard, since it is where both Randy and I have lived for years.  
+Presented as an alternative to a PowerPoint presentation, we ([Myles Walimaa](https://mwalimaa.github.io/portfolio/) and [Randy Swaty](mailto:rswaty@tnc.org)) hope to orient you to Michigan's ecosystems as they were just prior to European Colonization and as of ~2020. This can certainly be built upon and these workflows may be used for any area of interest. The State of Michigan is the target area for this dashboard, since it is where both Randy and I have lived for years.  
 
 Randy is an ecologist for The Nature Conservancy and I am a former National Park Service employee. We both work with the [Conservation Data Lab](https://conservationdatalab.org/) to mentor students in the art of computer coding and data visualization, particularly for conservation purposes.  
 
@@ -73,7 +73,7 @@ bps_att3 <- read.csv("./outputs/bps_att_chart.csv") %>%
   top_n(30)
 
 chart2 <- ggplot(data = bps_att3, aes(fill = GROUPVEG, y = acres, x = reorder(BPS_NAME, acres))) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", colour = "grey40") +
   coord_flip() +
   labs(title = "Top 30 Historic Ecosystems in Michigan",
        x = "",
@@ -86,7 +86,8 @@ chart2 <- ggplot(data = bps_att3, aes(fill = GROUPVEG, y = acres, x = reorder(BP
     "#73A07C", # hardwood
     "#9b54f3", # hardwood-conifer
     "#0050ae"  # riparian
-   )) 
+   )) +
+  scale_y_continuous(labels = scales::comma)
 
 
 ichart2 <- plotly::ggplotly(chart2, tooltip = c("x", "y", "fill", "total")) %>% 
@@ -155,7 +156,7 @@ evt_att3 <- read.csv("./outputs/evt_att_chart.csv") %>%
   top_n(30)
 
 chart3 <- ggplot(data = evt_att3, aes(fill = EVT_PHYS, y = acres, x = reorder(EVT_NAME, acres))) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", colour = "grey40") +
   coord_flip() +
   labs(title = "Top 30 Current Ecosystems in Michigan",
        x = "",
@@ -170,7 +171,8 @@ chart3 <- ggplot(data = evt_att3, aes(fill = EVT_PHYS, y = acres, x = reorder(EV
     "#730000", # exotic
     "#73A07C", # hardwood
     "#0050ae"  # riparian
-   )) 
+   )) +
+  scale_y_continuous(labels = scales::comma)
 
   
   chart3
@@ -239,19 +241,20 @@ c3 <- c2  %>%
 #levels(c3$SCL_V) <- rev(levels(c3$SCL_V))
 
 chart <- ggplot(data = c3, aes(fill = SCL_V, y = acres, x = reorder(BPS_NAME, acres))) +
-  geom_bar(position = "stack", stat = "identity") +
+  geom_bar(position = "stack", stat = "identity", colour = "grey40") +
   coord_flip() +
   scale_fill_manual(values = c(
     "#FFFF73", # agricultural
     "#CCCCCC", # developed
-    "#33a02c", # Other-changed ecosystem
-    "#4A3DAE"  # Natural Veg
+    "#4A3DAE", # Other-changed ecosystem
+    "#33a02c"  # Natural Veg
     )) +
   labs(title = "Top 30 Historic Ecosystems and How They Changed",
        x = "",
        y = "Acres",
        fill = "Land Cover Type") +
-  theme_light()
+  theme_light()+
+  scale_y_continuous(labels = scales::comma)
 
 
 ichart <- plotly::ggplotly(chart, tooltip = c("x", "y", "fill", "total"))
@@ -277,13 +280,12 @@ ichart
 ***
 **Observations and the dataset**
 
-This chart allows us to explore conversion of the historical ecosystems to 3 'novel' land cover types:
+This chart allows us to explore conversion of the historical ecosystems to 4 'novel' land cover types:
 
 - Agricultural 
 - Developed
-- Other.  This is when a historical ecosystem has changed to different historical ecosystem.  For example a patch of ground (acres are the units) that was "Laurentian-Acadian Northern Hardwoods" historically, and "Boreal White Spruce Hardwoods" today.  
-
-The "NatVeg" designation indicates no change.
+- Other, such as mining or influx of non-native species.  
+- NatVeg. This indicates no change, or when a historical ecosystem has changed to different historical ecosystem.  For example a patch of ground (acres are the units) that was "Laurentian-Acadian Northern Hardwoods" historically, and "Boreal White Spruce Hardwoods" today.  
 
 Which ecosystems remain mostly the same? Is this surprising?  
 
@@ -367,25 +369,22 @@ browsable(
 ```
 
 ***
-**DISCLAIMER:**  
-Unfortunately, this is *not* an "apples to apples" comparison. The datasets used were BioPhysical Settings (historical model) and Existing Vegetation Type (current satellite imagery, ground assessment, other methods). Additionally, the Existing Vegetation Type is not a perfect representation of the ground because there can be multiple ecosystems found in 900 m^2^ (remember 30m x 30m pixels).  
+**Observations and the dataset**
 
-- This chart provides a general idea of how Michigan land has changed on a coarse scale.  
+This interactive chart shows us the flow of ecosystem conversion over broad land cover types.  
 
-- BPS and EVT were stacked on top of each other, and we extracted the coarse categories from those datasets.  
+- The left side shows coarse landcover from the past (BPS), and the right shows current landcover (EVT)
+- The grey bands represent transitions from one to another  
+- When you hover, the number value is in acres (approx)  
 
-- The left side shows coarse landcover from the past (BPS), and the right shows current landcover (EVT).  
+Which ecosystems had the least amount of conversion?
 
-- The grey bands represent transitions from one to another.  
-
-- When you hover, the number value is in acres (approx).  
-
-Does anything surprise you about how things have changed?  
-
-Which ecosystems had the least amount of conversion? What about the most?
+What about the most? Where did they go? How many acres were converted?
 
 Why did so little Agricultural land come from Coniferous ecosystems?
 
+**DISCLAIMER:**
+Changes may be due to 'real' changes on the ground, or may be due to differences in mapping methods between the past and present datasets.  
 
 
 ### Fine Look at Conversion {data-commentary-width=500}
@@ -419,23 +418,22 @@ t2
 ```
 
 ***
+**Observations and the dataset**
 
-**DISCLAIMER:**  
-Unfortunately, this is *not* an "apples to apples" comparison. The datasets used were BioPhysical Settings (historical model) and Existing Vegetation Type (current satellite imagery, ground assessment, other methods). Additionally, the Existing Vegetation Type is not a perfect representation of the ground because there can be multiple ecosystems found in 900 m^2^ (remember 30m x 30m pixels).  
+This is the data table that created the previous chart. Here you can see in detail how the ecosystems converted.  
 
-- For those of you who want to explore this conversion further, search no more!  
+- There are over 2000 comparisons over 152 pages
 
-- BPS and EVT were overlaid on top of each other the attributes of each pixel were extracted.  
+- The left side shows landcover from the past (BPS), and the right shows current landcover (EVT)
 
-- The left side shows the historical BPS ecosystem, and the right side shows the current EVT ecosystem.  
+- The number value in acres is approximate  
 
-- The acre value shows how many acres converted from that BPS type to the EVT type.
+- Clicking on a column name will organize the data in ascending or descending order  
 
-- There are over 2000 comparisons over 152 pages.  
+- You may use the search bar in the upper-right to filter the data by keywords  
 
-- The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
+- To download the file, there are CSV and Excel buttons in the upper-left corner  
 
-- You can sort columns by ascending or descending order, as well as filter results or search for something specific.  
 
 For example, 429,625 acres of North-Central Oak Barrens are now Eastern Cool Temperate Row Crop. Well, roughly.
 
@@ -445,10 +443,5 @@ Again, this is not a perfect comparison and is only intended on giving you a gen
 **ENJOY AND HAVE FUN!!**
 
 
-### Learn More {data-commentary-width=500}
-
-```{r}
-
-```
-
-Sources, LF documentation, ideas, idk some useful stuff to keep pushing these people to research stuff
+**DISCLAIMER:**
+Changes may be due to 'real' changes on the ground, or may be due to differences in mapping methods between the past and present datasets.  
