@@ -37,7 +37,7 @@ tmap_mode("view")
 tm_shape(shp) +
   tm_borders(col = "gray", lwd = 2) +
   tm_basemap("Esri.WorldImagery") + 
-  tm_view(set.view = c(-84, 8, 4))
+  tm_view(set.view = c(-84, 35, 4))
 
 ```
 
@@ -128,7 +128,7 @@ Explore this map created by [Native Land Digital](https://native-land.ca/) to le
 
 - This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
 - 'Riparian' types include all wetlands.  
-- Download map of coarse ecosystems [here]()
+- Download map of coarse ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/bps-gv-greasy.png)
 
 
 
