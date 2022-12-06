@@ -129,7 +129,11 @@ Explore this map created by [Native Land Digital](https://native-land.ca/) to le
 
 - This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
 - 'Riparian' types include all wetlands.  
+<<<<<<< HEAD
 - Download map of coarse ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/bps-gv-greasy.png )
+=======
+- Download map of coarse ecosystems <a href="bps-gv-greasy.png" download>here </a>
+>>>>>>> dd2610b21ee39f9a77adaac4f573f0818b61db73
 
 
 
