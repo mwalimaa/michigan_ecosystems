@@ -275,25 +275,26 @@ ichart
 ```
 
 ***
+**Observations and the dataset**
 
-**DISCLAIMER:**
-The assumptions made in this chart are that *if* the ecosystems are no longer following the trajectory of natural ecological succession, *then* they have been converted into something unnatural. This chart does not consider ecosystems changing from one to another as that may happen naturally, only change into non-native, mineland, agriculture, development, or the like.  
+This chart allows us to explore conversion of the historical ecosystems to 3 'novel' land cover types:
 
-- You can see which of the ecosystems remained relatively untouched, as well as the ones that were heavily affected.  
+- Agricultural 
+- Developed
+- Other.  This is when a historical ecosystem has changed to different historical ecosystem.  For example a patch of ground (acres are the units) that was "Laurentian-Acadian Northern Hardwoods" historically, and "Boreal White Spruce Hardwoods" today.  
 
-- The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
-
-- When you hover, you can see how many acres of each ecosystem changed (roughly). 
-
-- Use your mouse to zoom in on smaller areas by drawing a box.  
-
-- You can reset the zoom by clicking the "house" icon at the top left of the chart.  
+The "NatVeg" designation indicates no change.
 
 Which ecosystems remain mostly the same? Is this surprising?  
 
 Where did most of the agricultural land come from?  Do you notice any trends?  
 
 Are there any ecosystems that might be close to disappearing completely?
+
+**DISCLAIMER:**
+Changes may be due to 'real' changes on the ground, or may be due to differences in mapping methods between the past and present datasets.  
+
+The map only depicts Agricultural and Developed land cover types.  Map may be downloaded [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/conversion.png)
 
 
 
