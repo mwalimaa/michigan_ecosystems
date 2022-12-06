@@ -1,0 +1,246 @@
+---
+title: "updated MW"
+author: "Randy Swaty"
+date: '2022-07-13'
+output: html_document
+---
+
+**Libraries**
+```{r libraries, message=FALSE, warning=FALSE, include=FALSE}
+
+library(foreign)
+library(sf)
+library(terra)
+library(tidyverse)
+library(raster)
+
+
+```
+
+
+## Read in shapefile
+
+```{r}
+#  read shape
+shp <- st_read("./DATA/umatillaRepaired.shp") %>% 
+  st_transform(crs = 5070) %>%
+  st_union() %>%
+  st_sf()
+
+shp
+```
+
+
+
+BpS Raster work, write attributes
+```{r}
+# crop and mask raster by shape
+bps_cropped_masked <-  terra::rast("./DATA/LF2016_BPS_200_CONUS/LC16_BPS_200.tif") %>%
+  terra::crop(shp) %>%
+  terra::mask(shp) 
+
+# convert from SpatRaster to Raster
+bps_r <- raster(bps_cropped_masked) 
+
+plot(bps_r)
+
+raster::writeRaster(bps_r, 
+                "./OUTPUTS/bps_aoi_crop.tif", 
+              overwrite = TRUE, 
+                options=c('TFW=YES'), 
+                datatype = "INT2S")
+
+    bps_x <- bps_cropped_masked %>%
+      terra::extract(shp, 
+                     list = TRUE) %>%
+      unlist() %>%
+      table(dnn = "VALUE") %>%
+      as.data.frame() %>%
+      arrange(desc(Freq)) %>%
+      mutate_all(as.character) %>%
+      mutate_all(as.integer) %>%
+      left_join(cats(bps_cropped_masked)[[1]], by = "VALUE") %>%
+      transmute(COUNT = Freq,
+                VALUE = VALUE,
+                BPS_NAME = BPS_NAME,
+                BPS_MODEL = BPS_MODEL,
+                GROUPVEG = GROUPVEG,
+                FRI_REPLAC = FRI_REPLAC,
+                FRI_MIXED = FRI_MIXED,
+                FRI_SURFAC = FRI_SURFAC,
+                FRI_ALLFIR = FRI_ALLFIR,
+                ACRES = (Freq * 900 / 4046.86),
+                HECTARES = (Freq * 900 / 10000),
+                REL_PERCENT = (Freq / sum(Freq)) * 100,
+                RED = RED,
+                GREEN = GREEN,
+                BLUE = BLUE,
+                R = R,
+                G = G,
+                B = B)
+
+
+## write csv for fun, .dbf for use in ArcGIS
+write.csv(bps_x, "./OUTPUTS/bps_aoi_attributes.csv")
+write.dbf(bps_x, "./OUTPUTS/bps_aoi_crop.tif.vat.dbf")
+
+## BpS color file for use in QGIS
+     BpSColorFile <- bps_x %>%
+       add_column(z = 255) %>%
+       dplyr::select(VALUE,
+              R,
+              G,
+              B,
+              z,
+              BPS_NAME)
+     write.table(BpSColorFile, file = "./OUTPUTS/BpSColorFile.txt", sep = ",",
+                 row.names = FALSE, col.names = FALSE, quote = FALSE)
+```
+
+
+## BpS barchart
+```{r}
+
+# bpsname <- read.csv(file = "./OUTPUTS/bps_aoi_attributes.csv")
+ 
+
+bpsname <- bps_x %>%
+  group_by(BPS_NAME) %>%
+  summarize(ACRES = sum(ACRES),
+            REL_PERCENT = sum(REL_PERCENT)) %>%
+  arrange(desc(REL_PERCENT)) %>%
+  top_n(n = 10, wt = REL_PERCENT)
+
+# plot
+bpsChart <- 
+  ggplot(data = bpsname, aes(x = BPS_NAME, y = REL_PERCENT)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Top 10 Biophysical Settings for the Umatilla NWR",
+    subtitle = "Represents dominant vegetation systems pre-European colonization",
+    caption = "Data from landfire.gov.",
+    x = "",
+    y = "Percent of landscape") +
+  scale_x_discrete(limits = rev(bpsname$BPS_NAME)) +
+  coord_flip() +
+  theme_bw()
+
+bpsChart
+
+# if the plot looks good, save it
+ggsave("./OUTPUTS/bpsChart.png", width = 12, height = 5)
+     
+     
+     
+```
+
+
+EVT Raster work, write attributes
+
+```{r}
+# EVT
+evt_cropped_masked <-  terra::rast("./DATA/LF2020_EVT_220_CONUS/LC20_EVT_220.tif") %>%
+  terra::crop(shp) %>%
+  terra::mask(shp) 
+
+
+# convert from SpatRaster to Raster
+evt_r <- raster(evt_cropped_masked) 
+
+plot(evt_r)
+
+raster::writeRaster(evt_r, 
+                "./OUTPUTS/evt_aoi_crop.tif", 
+              overwrite = TRUE, 
+                options=c('TFW=YES'), 
+                datatype = "INT2S")
+
+    
+    
+    evt_x <- evt_cropped_masked %>%
+      terra::extract(shp,
+                     list = TRUE) %>%
+      unlist() %>%
+      table(dnn = "VALUE") %>%
+      as.data.frame() %>%
+      arrange(desc(Freq)) %>%
+      mutate_all(as.character) %>%
+      mutate_all(as.integer) %>%
+      left_join(cats(evt_cropped_masked)[[1]], by = "VALUE") %>%
+      transmute(VALUE = VALUE,
+                COUNT = Freq,
+                EVT_NAME = EVT_NAME,
+                EVT_FUEL_N = EVT_FUEL_N,
+                EVT_LF = EVT_LF,
+                EVT_PHYS = EVT_PHYS,
+                EVT_GP_N = EVT_GP_N,
+                EVT_ORDER = EVT_ORDER,
+                EVT_CLASS = EVT_CLASS,
+                EVT_SBCLS = EVT_SBCLS,
+                ACRES = (Freq * 900 / 4046.86), # Freq is count of 30x30m or 900m^2 pixels, convert to acres
+                HECTARES = (Freq * 900 / 10000),
+                REL_PERCENT = (Freq / sum(Freq)) * 100,
+                RED = RED,
+                GREEN = GREEN,
+                BLUE = BLUE,
+                R = R,
+                G = G,
+                B = B)
+    
+    
+    write.csv(evt_x, "./OUTPUTS/evt_aoi_attributes.csv")
+    write.dbf(evt_x, "./OUTPUTS/evt_aoi_crop.tif.vat.dbf")
+    
+    ## EVT color file for use in QGIS
+    EVTColorFile <- evt_x     %>%
+      add_column(z = 255)     %>%
+      dplyr::select(VALUE,
+                    R,
+                    G,
+                    B,
+                    z,
+                    EVT_NAME) 
+    
+    
+    write.table(EVTColorFile, file = "./OUTPUTS/EVTColorFile.txt", sep = ",",
+                row.names = FALSE, col.names = FALSE, quote = FALSE)
+```
+
+## EVT Barchart
+
+```{r}
+#evtname <- read.csv(file = "./OUTPUTS/evt_aoi_attributes.csv") %>%
+
+evtname <- evt_x %>%
+  group_by(EVT_NAME) %>%
+  summarize(ACRES = sum(ACRES),
+            HECTARES = sum(HECTARES),
+            REL_PERCENT = sum(REL_PERCENT)) %>%
+  arrange(desc(REL_PERCENT)) %>%
+  top_n(n = 10, wt = REL_PERCENT)
+
+# plot
+evtChart <-
+  ggplot(data = evtname, aes(x = EVT_NAME, y = REL_PERCENT)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Top 10 Existing Vegetation Types for the Umatilla NWR",
+    subtitle = "Represents dominant vegetation systems ca2016",
+    caption = "Represents ~90% of the landscape. There are 45 EVTs total. \nData from landfire.gov.",
+    x = "",
+    y = "Percent of landscape") +
+  scale_x_discrete(limits = rev(evtname$EVT_NAME)) +
+  coord_flip() +
+  theme_bw()
+
+evtChart
+
+# save the plot
+ggsave( "./OUTPUTS/evtname_barplot.png", width = 12, height = 5)
+```
+
+
+
+
+
+

@@ -1,0 +1,446 @@
+---
+title: "Michigan Ecosystem Explorer"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    theme:
+      version: 4
+      bg: "#101010"
+      fg: "#FDF7F7" 
+      primary: "#5ea8bd"
+      navbar-bg: "#a3a2a2"
+      base_font: 
+        google: Prompt
+      heading_font:
+        google: Sen
+      code_font:
+        google: 
+          # arguments to sass::font_google() 
+          family: JetBrains Mono
+          local: false
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+
+### Welcome! {data-commentary-width=500}
+
+```{r out.height="40%"}
+library(tmap)
+library(sf)
+library(tidyverse)
+
+shp <- st_read("./us_state_bounds/michigan500k.shp", quiet = T) 
+tmap_mode("view")
+tm_shape(shp) +
+  tm_borders(col = "gray", lwd = 2) +
+  tm_basemap("Esri.WorldImagery") + 
+  tm_view(set.view = c(-84, 8, 4))
+
+```
+
+***
+<font size = "4"> Exploring Michigan's Ecosystems, Past and Present </font>  
+
+Presented as an alternative to a PowerPoint presentation, we ([Myles Walimaa](mailto:mwalimaa@gmail.com) and [Randy Swaty](mailto:rswaty@tnc.org) ) hope to orient you to Michigan's ecosystems as they were just prior to European Colonization and as of ~2020. This can certainly be built upon and these workflows may be used for any area of interest. The State of Michigan is the target area for this dashboard, since it is where both Randy and I have lived for years.  
+
+Randy is an ecologist for The Nature Conservancy and I am a former National Park Service employee. We both work with the [Conservation Data Lab](https://conservationdatalab.org/) to mentor students in the art of computer coding and data visualization, particularly for conservation purposes.  
+
+As you explore, ask yourself some of these questions:  
+
+* What is an "ecosystem" to you? How coarse or fine should we define these?  
+* What percentage of Michigan was/is covered by wetlands? How important are wetlands to you? What is their ecological value?  
+* How often do you think wildfires occurred historically? Can you think of any ecosystems that are fire dependent?  
+* Which ecosystems in Michigan have you seen? Are there any you would like to see?  
+* Are there any trends that you have noticed, based off the data presented?
+
+<font size = "3"> *PLEASE read the disclaimers on each slide explaining the assumptions with each dataset. This is meant for exploratory purposes only.*</font>  
+  
+
+
+### The Past {data-commentary-width=500}
+
+```{r}
+
+# greasy removed barren from raw data
+library(tidyverse)
+library(plotly)
+options(scipen = 999)
+
+bps_att3 <- read.csv("./outputs/bps_att_chart.csv") %>%
+  top_n(30)
+
+chart2 <- ggplot(data = bps_att3, aes(fill = GROUPVEG, y = acres, x = reorder(BPS_NAME, acres))) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 30 Historic Ecosystems in Michigan",
+       x = "",
+       y = "Acres",
+       fill = "Course \nVegetation \nClassification") +
+  theme_light() +
+  scale_fill_manual(values = c(
+    "#032B0B", # conifer
+    "#f98517", # grassland
+    "#73A07C", # hardwood
+    "#9b54f3", # hardwood-conifer
+    "#0050ae"  # riparian
+   )) 
+
+
+ichart2 <- plotly::ggplotly(chart2, tooltip = c("x", "y", "fill", "total")) %>% 
+  plotly::style(hoverinfo = "none" ) 
+  
+
+ichart2  %>%
+  layout(
+    images = list(
+      source = base64enc::dataURI(file = "bps-gv-greasy.png"),
+      x = 0.40, y = 0.10, 
+      sizex = .5, sizey = .5,
+      xref = "paper", yref = "paper", 
+      xanchor = "left", yanchor = "bottom"
+    ),
+    margin = list(t = 50)
+  )
+
+
+ichart2
+
+
+```
+
+
+***
+**Observations and the dataset**
+Historically, Michigan was dominated by hardwood-dominated ecosystems, with a substantial showing of wetland  (refered to as "riparian" in the source data set) conifer and mixed hardwood-conifer types.
+
+This map was created using LANDFIRE's [Biophysical Settings](https://landfire.gov/bps.php). As there was no satellite imagery 300 years ago, this is a *model* of what the historical ecosystems looked like based soil types, climate, elevation, ecological succession, among many other datasets. The original data displayed plots of 30m x 30m squares that we call "pixels", and Michigan has over 500 million of them! 
+
+
+This is what we think the distribution of ecosystems looked like prior to European settlement. The caretakers of this land at the time were the indigenous natives who called the Great Lakes their home. They recognized the value of fire for regeneration and resiliency, often performing "prescribed" burns to keep their home strong and healthy.  
+
+
+Explore this map created by [Native Land Digital](https://native-land.ca/) to learn more about which tribes were located where. Botanist Robin Wall Kimmerer's book [Braiding Sweetgrass](https://milkweed.org/book/braiding-sweetgrass) provides valuable insight on the traditional ways the natives connected with the land, largely through combining ancient philosophy and modern science.
+
+**DISCLAIMER:** 
+
+- This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
+- 'Riparian' types include all wetlands.  
+- Download map of coarse ecosystems [here]()
+
+
+
+### Present {data-commentary-width=500}
+
+```{r}
+library(tidyverse)
+options(scipen = 999)
+
+
+evt_att3 <- read.csv("./outputs/evt_att_chart.csv") %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Developed"), "Developed"),
+         EVT_NAME = replace(EVT_NAME, str_detect(EVT_NAME, "Developed"), "Developed")) %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Exotic"), "Exotic"),
+         EVT_NAME = replace(EVT_NAME, str_detect(EVT_NAME, "Exotic"), "Exotic")) %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Quarries"), "Mineland"),
+         EVT_NAME = replace(EVT_NAME, str_detect(EVT_NAME, "Quarries"), "Mineland")) %>%
+  group_by(EVT_NAME, EVT_PHYS) %>%
+  summarise(Freq = sum(Freq),
+            acres = sum(acres)) %>%
+  arrange(desc(acres)) %>%
+  as.data.frame() %>%
+  top_n(30)
+
+chart3 <- ggplot(data = evt_att3, aes(fill = EVT_PHYS, y = acres, x = reorder(EVT_NAME, acres))) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 30 Current Ecosystems in Michigan",
+       x = "",
+       y = "Acres",
+       fill = "Course \nVegetation \nClassification") +
+  theme_light()   + 
+  scale_fill_manual(values = c(
+    "#FFFF73", # agricultural
+    "#032B0B", # conifer ?
+    "#9b54f3", # conifer-hardwood
+    "#b1b2b3",  # developed?
+    "#730000", # exotic
+    "#73A07C", # hardwood
+    "#0050ae"  # riparian
+   )) 
+
+  
+  chart3
+
+ichart3 <- plotly::ggplotly(chart3, tooltip = c("x", "y", "fill", "total")) %>% 
+  plotly::style(hoverinfo = "none" ) 
+
+ichart3  %>%
+  layout(
+    images = list(
+      source = base64enc::dataURI(file = "evt-gv-greasy.png"),
+      x = 0.40, y = 0.10, 
+      sizex = .45, sizey = .45,
+      xref = "paper", yref = "paper", 
+      xanchor = "left", yanchor = "bottom"
+    ),
+    margin = list(t = 50)
+  )
+
+ichart3 <- plotly::ggplotly(chart3, tooltip = c("x", "y", "fill", "total"))
+
+
+ichart3
+
+```
+
+***
+
+**DISCLAIMER:**  
+This chart was created using LANDFIRE's Existing Vegetation Type. This uses satellite imagery, ground assessment, and other methods to describe current "ecosystems" (or lack thereof). I grouped all the developed sub-categories into a single "Developed" classification.  
+
+- Existing Vegetation Type (EVT) has a "fine" scale classification called "EVT_NAME" and a "coarse" scale classification called "EVT_PHYS".  
+
+- The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
+
+- When you hover, you can see how many acres of each ecosystem exists (roughly).  
+
+- Use your mouse to zoom in on smaller areas by drawing a box.  
+
+- You can reset the zoom by clicking the "house" icon at the top left of the chart.  
+
+Does anything jump out to you as surprising?  
+
+Should "ruderal" ecosystems be classified as agriculture, exotic, or something else? Disturbed?  
+
+What do you notice about the historical and current ratios of conifers-to-hardwoods?  
+
+Again, this is *not* a perfect representation of today's conditions and is meant for scales of several thousand+ acres. If you want to explore the EVT dataset further, you can find [information here](https://www.landfire.gov/evt.php) and can read about its development. There is a nifty [handbook](https://www.landfire.gov/documents/LANDFIRE_Ecological_Systems_Descriptions_CONUS.pdf) that discusses each ecosystem classification in a fair amount of depth, so you may get a better idea of what you may find there.
+
+
+
+
+### Exploring Change {data-commentary-width=500}
+
+```{r}
+library(tidyverse)
+c2 <- read.csv("./outputs/bps2scl.csv")
+
+c3 <- c2  %>%
+  # group_by(BPS_NAME) %>%
+  # summarise(sumf = sum(freq)) %>%
+  # left_join(c2, by = "BPS_NAME") %>%
+  # select(BPS_NAME, SCL_V, sumf, freq) %>%
+  group_by(BPS_NAME, SCL_V) %>%
+  summarise(freq = sum(freq)) %>%
+  as.data.frame() %>%
+  mutate(SCL_V = replace(SCL_V, str_detect(SCL_V, "Ag"), "Agricultural")) %>%
+  mutate(acres = round(freq * 900 / 4046.85),
+         SCL_V = factor(c(SCL_V), levels= c("Agricultural", "Developed", "Other", "NatVeg")))
+
+#levels(c3$SCL_V) <- rev(levels(c3$SCL_V))
+
+chart <- ggplot(data = c3, aes(fill = SCL_V, y = acres, x = reorder(BPS_NAME, acres))) +
+  geom_bar(position = "stack", stat = "identity") +
+  coord_flip() +
+  scale_fill_manual(values = c(
+    "#FFFF73", # agricultural
+    "#CCCCCC", # developed
+    "#33a02c", # Other-changed ecosystem
+    "#4A3DAE"  # Natural Veg
+    )) +
+  labs(title = "Top 30 Historic Ecosystems and How They Changed",
+       x = "",
+       y = "Acres",
+       fill = "Land Cover Type") +
+  theme_light()
+
+
+ichart <- plotly::ggplotly(chart, tooltip = c("x", "y", "fill", "total"))
+
+ichart  %>%
+  layout(
+    images = list(
+      source = base64enc::dataURI(file = "docs/dash/conversion.png"),
+      x = 0.40, y = 0.10, 
+      sizex = .45, sizey = .45,
+      xref = "paper", yref = "paper", 
+      xanchor = "left", yanchor = "bottom"
+    ),
+    margin = list(t = 50)
+  )
+
+
+
+
+ichart
+```
+
+***
+
+**DISCLAIMER:**
+The assumptions made in this chart are that *if* the ecosystems are no longer following the trajectory of natural ecological succession, *then* they have been converted into something unnatural. This chart does not consider ecosystems changing from one to another as that may happen naturally, only change into non-native, mineland, agriculture, development, or the like.  
+
+- You can see which of the ecosystems remained relatively untouched, as well as the ones that were heavily affected.  
+
+- The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
+
+- When you hover, you can see how many acres of each ecosystem changed (roughly). 
+
+- Use your mouse to zoom in on smaller areas by drawing a box.  
+
+- You can reset the zoom by clicking the "house" icon at the top left of the chart.  
+
+Which ecosystems remain mostly the same? Is this surprising?  
+
+Where did most of the agricultural land come from?  Do you notice any trends?  
+
+Are there any ecosystems that might be close to disappearing completely?
+
+
+
+### Coarse Look at Conversion {data-commentary-width=500}
+
+```{r}
+library(tidyverse)
+c <- read.csv("./outputs/bps2evt.csv")
+
+library(htmltools)
+
+# finding GROUPVEG categories
+group <- c %>% group_by(GROUPVEG) %>% 
+  summarise(freq = sum(Freq.x)) %>%
+  arrange(desc(freq)) %>%
+  pull(GROUPVEG)
+
+# grouping combine and filter
+data <- c %>% select(GROUPVEG, EVT_PHYS, Freq.x, Freq.y, freq) %>% 
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Developed"), "Developed")) %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Exotic"), "Exotic")) %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Quarries"), "Mineland")) %>%
+  group_by(GROUPVEG, EVT_PHYS) %>%
+  summarise(freq2 = sum(freq)) %>%
+  filter(GROUPVEG %in% group) %>%
+  mutate(ACRES = round(freq2 * 900 / 4046.86)) %>%
+  rename(source = GROUPVEG,
+         target = EVT_PHYS,
+         value = ACRES) %>%
+  mutate(source = paste0(source, " (past)"),
+         target = paste0(target, " (present)"))
+
+##############
+##############
+# BUILDING SANKEY
+
+nodes <- data.frame(
+  name = c(as.character(data$source),
+           as.character(data$target)) %>% unique())
+
+data$IDsource <- match(data$source, nodes$name) - 1
+data$IDtarget <- match(data$target, nodes$name) - 1
+
+browsable(
+  tags$div(
+    style = "background-color:#FFFFFF;",
+    networkD3::sankeyNetwork(Links = data,
+                         Nodes = nodes,
+                         Source = "IDsource",
+                         Target = "IDtarget",
+                         Value = "value",
+                         NodeID = "name",
+                         fontSize = 14,
+                         iterations = 0)
+  )
+)
+
+
+
+# snky <- networkD3::sankeyNetwork(Links = data,
+#                                  Nodes = nodes,
+#                                  Source = "IDsource",
+#                                  Target = "IDtarget",
+#                                  Value = "value",
+#                                  NodeID = "name",
+#                                  fontSize = 14,
+#                                  iterations = 0,
+#                                  sinksRight = F)
+# snky
+```
+
+***
+**DISCLAIMER:**  
+Unfortunately, this is *not* an "apples to apples" comparison. The datasets used were BioPhysical Settings (historical model) and Existing Vegetation Type (current satellite imagery, ground assessment, other methods). Additionally, the Existing Vegetation Type is not a perfect representation of the ground because there can be multiple ecosystems found in 900 m^2^ (remember 30m x 30m pixels).  
+
+- This chart provides a general idea of how Michigan land has changed on a coarse scale.  
+
+- BPS and EVT were stacked on top of each other, and we extracted the coarse categories from those datasets.  
+
+- The left side shows coarse landcover from the past (BPS), and the right shows current landcover (EVT).  
+
+- The grey bands represent transitions from one to another.  
+
+- When you hover, the number value is in acres (approx).  
+
+Does anything surprise you about how things have changed?  
+
+Which ecosystems had the least amount of conversion? What about the most?
+
+Why did so little Agricultural land come from Coniferous ecosystems?
+
+
+
+### Fine Look at Conversion {data-commentary-width=500}
+
+```{r}
+library(tidyverse)
+t <- read.csv("./outputs/bps2evt.csv")
+bps_att <- read.csv("./outputs/bps_michigan.csv")
+evt_att <- read.csv("./outputs/evt_michigan.csv")
+
+t1 <- t %>%
+  group_by(BPS_NAME, EVT_NAME, GROUPVEG, EVT_PHYS) %>%
+  summarise(freq = sum(freq)) %>%
+  mutate(ACRES = round(freq * 900 / 4046.86)) %>%
+  select(BPS_NAME, GROUPVEG, ACRES, EVT_PHYS, EVT_NAME) %>%
+  arrange(desc(ACRES))
+            
+t2 <- reactable::reactable(t1, defaultPageSize = 15, filterable = T, searchable = T)
+t2
+```
+
+***
+
+**DISCLAIMER:**  
+Unfortunately, this is *not* an "apples to apples" comparison. The datasets used were BioPhysical Settings (historical model) and Existing Vegetation Type (current satellite imagery, ground assessment, other methods). Additionally, the Existing Vegetation Type is not a perfect representation of the ground because there can be multiple ecosystems found in 900 m^2^ (remember 30m x 30m pixels).  
+
+- For those of you who want to explore this conversion further, search no more!  
+
+- BPS and EVT were overlaid on top of each other the attributes of each pixel were extracted.  
+
+- The left side shows the historical BPS ecosystem, and the right side shows the current EVT ecosystem.  
+
+- The acre value shows how many acres converted from that BPS type to the EVT type.
+
+- There are over 2000 comparisons over 152 pages.  
+
+- The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
+
+- You can sort columns by ascending or descending order, as well as filter results or search for something specific.  
+
+For example, 429,625 acres of North-Central Oak Barrens are now Eastern Cool Temperate Row Crop. Well, roughly.
+
+Again, this is not a perfect comparison and is only intended on giving you a general idea of what's going on.  
+
+
+**ENJOY AND HAVE FUN!!**
+
+
+### Learn More {data-commentary-width=500}
+
+```{r}
+
+```
+
+Sources, LF documentation, ideas, idk some useful stuff to keep pushing these people to research stuff

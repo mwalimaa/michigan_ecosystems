@@ -1,0 +1,92 @@
+"","EVT_NAME","EVT_PHYS","Freq","acres"
+"1","Eastern Cool Temperate Row Crop","Agricultural",24408796,5428386
+"2","Laurentian-Acadian Northern Hardwoods Forest","Hardwood",22977885,5110159
+"3","Laurentian-Acadian Alkaline Conifer-Hardwood Swamp","Riparian",16405225,3648434
+"4","Developed-Roads","Developed-Roads",8384094,1864578
+"5","Laurentian-Acadian Sub-boreal Aspen-Birch Forest","Hardwood",8048587,1789963
+"6","Eastern Cool Temperate Pasture and Hayland","Agricultural",5133297,1141618
+"7","Eastern Cool Temperate Close Grown Crop","Agricultural",4744511,1055154
+"8","Laurentian Jack Pine-Red Pine Forest","Conifer",4712080,1047941
+"9","Laurentian-Acadian Northern Oak Forest","Hardwood",3667079,815539
+"10","Northeastern North American Temperate Forest Plantation","Conifer",3642273,810022
+"11","Boreal-Laurentian Conifer Acidic Swamp and Treed Poor Fen","Riparian",3601189,800885
+"12","Eastern Cool Temperate Fallow/Idle Cropland","Agricultural",3585837,797471
+"13","North-Central Interior Beech-Maple Forest","Hardwood",3451647,767628
+"14","Developed-Low Intensity","Developed-Low Intensity",3270460,727333
+"15","North-Central Interior and Appalachian Rich Swamp","Riparian",3156562,702002
+"16","North-Central Interior Dry-Mesic Oak Forest and Woodland","Hardwood",3071092,682994
+"17","Laurentian-Acadian Sub-boreal Mesic Balsam Fir-Spruce Forest","Conifer",2949576,655970
+"18","Northern & Central Ruderal Meadow","Exotic Herbaceous",2933410,652375
+"19","North-Central Interior Dry Oak Forest and Woodland","Hardwood",2903891,645810
+"20","Northern & Central Native Ruderal Forest","Conifer-Hardwood",2671013,594019
+"21","Laurentian-Acadian Pine-Hemlock Forest","Conifer",2543617,565687
+"22","Laurentian-Acadian Northern Pine Forest","Conifer",2493193,554473
+"23","Eastern Cool Temperate Urban Herbaceous","Developed",2161176,480634
+"24","Eastern Cool Temperate Wheat","Agricultural",2112275,469759
+"25","Laurentian-Acadian Pine-Hemlock-Hardwood Forest","Conifer-Hardwood",1808819,402272
+"26","Developed-Medium Intensity","Developed-Medium Intensity",1758308,391038
+"27","Eastern Cool Temperate Urban Deciduous Forest","Developed",1634441,363491
+"28","Laurentian-Acadian Northern Pine-(Oak) Forest","Conifer-Hardwood",1628382,362143
+"29","North-Central Interior Floodplain Forest","Riparian",1417913,315336
+"30","Eastern Cool Temperate Orchard","Agricultural",1036045,230411
+"31","Eastern Cool Temperate Row Crop - Close Grown Crop","Agricultural",985995,219280
+"32","Developed-High Intensity","Developed-High Intensity",966228,214884
+"33","Eastern Cool Temperate Urban Shrubland","Developed",914322,203340
+"34","Eastern Cool Temperate Urban Mixed Forest","Developed",648134,144142
+"35","Laurentian-Acadian Floodplain Forest","Riparian",640497,142443
+"36","Eastern Cool Temperate Urban Evergreen Forest","Developed",541630,120456
+"37","Laurentian-Acadian Wet Meadow","Riparian",538103,119671
+"38","Laurentian Pine Barrens","Conifer",479481,106634
+"39","North-Central Oak Barrens Woodland","Hardwood",411897,91604
+"40","Eastern Cool Temperate Developed Deciduous Forest","Developed",396009,88070
+"41","Laurentian-Acadian Freshwater Marsh","Riparian",335929,74709
+"42","North-Central Interior Wet Meadow","Riparian",329384,73253
+"43","Northern & Central Ruderal Shrubland","Exotic Tree-Shrub",329319,73239
+"44","Laurentian-Acadian Hardwood Forest","Hardwood",322597,71744
+"45","Laurentian-Acadian Shrub Swamp","Riparian",321209,71435
+"46","North-Central Interior Freshwater Marsh","Riparian",265990,59155
+"47","Boreal-Laurentian Bog","Riparian",210940,46912
+"48","North-Central Interior Shrub Swamp","Riparian",199408,44347
+"49","Eastern Cool Temperate Developed Herbaceous","Developed",199266,44316
+"50","North-Central Interior and Appalachian Acidic Peatland Woodland","Riparian",192494,42810
+"51","Eastern Cool Temperate Bush fruit and berries","Agricultural",181157,40288
+"52","Northern & Central Native Ruderal Flooded & Swamp Forest","Riparian",175267,38978
+"53","Great Lakes Wooded Dune and Swale","Riparian",159299,35427
+"54","Eastern Cool Temperate Developed Evergreen Forest","Developed",157296,34982
+"55","Northern & Central Ruderal Wet Meadow & Marsh","Riparian",141907,31559
+"56","Eastern Cool Temperate Developed Mixed Forest","Developed",139334,30987
+"57","Northern Great Lakes Coastal Marsh","Riparian",111436,24783
+"58","Eastern Cool Temperate Vineyard","Agricultural",110290,24528
+"59","Quarries-Strip Mines-Gravel Pits-Well and Wind Pads","Quarries-Strip Mines-Gravel Pits-Well and Wind Pads",107003,23797
+"60","North-Central Interior Shrub Alkaline Fen","Riparian",99575,22145
+"61","Laurentian Oak Barrens","Hardwood",77427,17219
+"62","Great Lakes Dune","Sparsely Vegetated",66678,14829
+"63","Boreal-Laurentian-Acadian Acidic Basin Fen","Riparian",43237,9616
+"64","North-Central Oak Barrens Herbaceous","Grassland",27563,6130
+"65","North-Central Interior Sand and Gravel Tallgrass Prairie","Grassland",25331,5633
+"66","Great Lakes Wet-Mesic Lakeplain Prairie","Riparian",23540,5235
+"67","Great Lakes Freshwater Estuary and Delta","Riparian",20345,4525
+"68","Laurentian-Acadian Alkaline Fen","Riparian",20332,4522
+"69","North-Central Interior Wet Flatwoods","Riparian",19376,4309
+"70","Laurentian-Acadian Floodplain Shrubland","Riparian",18057,4016
+"71","Laurentian Pine-Oak Barrens","Conifer-Hardwood",17692,3935
+"72","Great Lakes Dune Grassland","Grassland",17251,3837
+"73","Eastern Cool Temperate Developed Shrubland","Developed",16546,3680
+"74","Northern Great Lakes Interdunal Wetland","Riparian",13437,2988
+"75","Laurentian Acidic Rocky Outcrop Woodland","Conifer",13121,2918
+"76","North-Central Interior Graminoid Alkaline Fen","Riparian",9499,2113
+"77","North-Central Interior Floodplain Shrubland","Riparian",6391,1421
+"78","Laurentian-Acadian Sub-boreal Dry-Mesic Pine-Black Spruce Forest","Conifer",6283,1397
+"79","Northern Atlantic Coastal Plain Pond","Riparian",5271,1172
+"80","Eastern Cool Temperate Aquaculture","Agricultural",3112,692
+"81","Great Lakes Alvar","Grassland",2994,666
+"82","North-Central Interior Oak Savanna","Hardwood",2302,512
+"83","Laurentian-Acadian Sub-boreal Dry-Mesic Pine-Black Spruce-Hardwood Forest","Conifer-Hardwood",2130,474
+"84","North-Central Interior and Appalachian Acidic Peatland Shrubland","Riparian",1813,403
+"85","Laurentian Acidic Rocky Outcrop Shrubland","Shrubland",1349,300
+"86","Great Lakes Alkaline Rocky Shore and Cliff","Sparsely Vegetated",1247,277
+"87","Great Lakes Acidic Rocky Shore and Cliff","Sparsely Vegetated",453,101
+"88","Laurentian-Acadian Acidic Cliff and Talus","Sparsely Vegetated",424,94
+"89","Laurentian-Acadian Calcareous Cliff and Talus","Sparsely Vegetated",42,9
+"90","North-Central Interior Maple-Basswood Forest","Hardwood",5,1
+"91","Central Interior Acidic Cliff and Talus","Sparsely Vegetated",6,1

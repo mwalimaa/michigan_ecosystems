@@ -1,0 +1,83 @@
+"","VALUE","Freq","BPS_CODE","ZONE","BPS_MODEL","BPS_NAME","GROUPVEG","FRI_REPLAC","FRI_MIXED","FRI_SURFAC","FRI_ALLFIR","PRC_REPLAC","PRC_MIXED","PRC_SURFAC","FRG_NEW","R","G","B","RED","GREEN","BLUE"
+"1",-1111,86949,-1111,"na","na","Fill-Not Mapped","Fill-Not Mapped",NA,NA,NA,NA,NA,NA,NA,NA,111,111,111,0.435294,0.435294,0.435294
+"2",11,114900391,11,"na","na","Open Water","Open Water",NA,NA,NA,NA,NA,NA,NA,NA,0,0,255,0,0,1
+"3",31,68850,31,"na","na","Barren-Rock/Sand/Clay","Barren-Rock/Sand/Clay",NA,NA,NA,NA,NA,NA,NA,NA,191,191,191,0.74902,0.74902,0.74902
+"4",1561,1318943,13022,"50","13022_41_50_51","Laurentian-Acadian Northern Hardwoods Forest-Hemlock","Hardwood",2040,NA,NA,2040,100,NA,NA,"V-B",76,230,0,0.298039,0.901961,0
+"5",1562,785553,13022,"50","13022_41_50_51","Laurentian-Acadian Northern Hardwoods Forest-Hemlock","Hardwood",2040,NA,NA,2040,100,NA,NA,"V-B",76,230,150,0.298039,0.901961,0.588235
+"6",1563,337,13100,"50","13100_44_50","North-Central Interior Dry-Mesic Oak Forest and Woodland","Hardwood",123,49,76,24,20,48,32,"I-C",176,163,222,0.690196,0.639216,0.870588
+"7",1568,6805,13651,"50","13651_40_41_50","Boreal White Spruce-Fir-Hardwood Forest-Inland","Conifer",250,1468,NA,213,85,15,NA,"V-A",147,194,114,0.576471,0.760784,0.447059
+"8",1569,11655,13660,"50","13660_50","Laurentian-Acadian Pine-Hemlock-Hardwood Forest","Hardwood-Conifer",483,1018,291,154,32,15,53,"III-B",208,255,99,0.815686,1,0.388235
+"9",1570,31,13940,"50","13940_50_51","North-Central Interior Oak Savanna","Hardwood",66,184,5,5,7,3,90,"I-A",230,213,138,0.901961,0.835294,0.541176
+"10",1573,4078,14072,"50","14072_41_50_51","Laurentian Pine-Oak Barrens-Jack Pine","Conifer",25,46,18,8,34,18,48,"I-B",153,66,100,0.6,0.258824,0.392157
+"11",1575,1847,14120,"50","14120_39_40_41_42_43_50_51","North-Central Interior Sand and Gravel Tallgrass Prairie","Grassland",4,NA,87,3,96,NA,4,"II-A",214,0,157,0.839216,0,0.615686
+"12",1576,5102,14210,"50","14210_31_38_42_43_44_50_51","Central Tallgrass Prairie","Grassland",4,NA,NA,4,100,NA,NA,"II-A",232,255,196,0.909804,1,0.768627
+"13",1577,18160,14440,"50","14440_41_50_51","Eastern Boreal Floodplain","Hardwood",NA,581,312,203,NA,35,65,"V-A",69,69,156,0.270588,0.270588,0.611765
+"14",1578,9000,14660,"50","14660_50_51","Great Lakes Wooded Dune and Swale","Riparian",3715,536,NA,468,13,87,NA,"V-A",181,0,0,0.709804,0,0
+"15",1580,37654,14750,"50","14750_41_50_51_63_64_65_66","Laurentian-Acadian Floodplain Systems","Riparian",NA,435,68,59,NA,14,86,"III-A",122,143,245,0.478431,0.560784,0.960784
+"16",1581,476735,14770,"50","14770_40_41_50_51","Boreal Acidic Peatland Systems","Riparian",716,NA,123,105,15,NA,85,"III-B",106,0,138,0.415686,0,0.541176
+"17",1583,218963,14810,"50","14810_41_50_51_63","Laurentian-Acadian Alkaline Conifer-Hardwood Swamp","Riparian",989,NA,NA,989,100,NA,NA,"V-B",232,189,255,0.909804,0.741176,1
+"18",1584,41733,14920,"50","14920_41_50_51_52_63","Great Lakes Coastal Marsh Systems","Riparian",NA,NA,NA,NA,NA,NA,NA,NA,122,245,202,0.478431,0.960784,0.792157
+"19",1586,29970,14940,"50","14940_41_50_51","Laurentian-Acadian Shrub-Herbaceous Wetland Systems","Riparian",18,NA,NA,18,100,NA,NA,"II-C",0,168,107,0,0.658824,0.419608
+"20",1588,11,13022,"41","13022_41_50_51","Laurentian-Acadian Northern Hardwoods Forest-Hemlock","Hardwood",2040,NA,NA,2040,100,NA,NA,"V-B",76,230,0,0.298039,0.901961,0
+"21",1593,9,13440,"41","13440_41","Boreal Jack Pine-Black Spruce Forest","Conifer",82,NA,NA,82,100,NA,NA,"IV-A",255,140,140,1,0.54902,0.54902
+"22",1596,361736,13651,"41","13651_40_41_50","Boreal White Spruce-Fir-Hardwood Forest-Inland","Conifer",250,1468,NA,213,85,15,NA,"V-A",147,194,114,0.576471,0.760784,0.447059
+"23",1597,128425,13652,"41","13652_41","Boreal White Spruce-Fir-Hardwood Forest-Coastal","Conifer",939,1147,NA,516,55,45,NA,"V-B",110,137,70,0.431373,0.537255,0.27451
+"24",1598,731,13653,"41","13653_41","Boreal White Spruce-Fir-Hardwood Forest-Aspen-Birch","Conifer",112,243,NA,76,68,32,NA,"III-A",255,255,145,1,1,0.568627
+"25",1605,3130,14440,"41","14440_41_50_51","Eastern Boreal Floodplain","Hardwood",NA,581,312,203,NA,35,65,"V-A",69,69,156,0.270588,0.270588,0.611765
+"26",1607,103,14750,"41","14750_41_50_51_63_64_65_66","Laurentian-Acadian Floodplain Systems","Riparian",NA,435,68,59,NA,14,86,"III-A",122,143,245,0.478431,0.560784,0.960784
+"27",1608,38532,14770,"41","14770_40_41_50_51","Boreal Acidic Peatland Systems","Riparian",716,NA,123,105,15,NA,85,"III-B",106,0,138,0.415686,0,0.541176
+"28",1610,61550,14810,"41","14810_41_50_51_63","Laurentian-Acadian Alkaline Conifer-Hardwood Swamp","Riparian",989,NA,NA,989,100,NA,NA,"V-B",232,189,255,0.909804,0.741176,1
+"29",1611,2068,14920,"41","14920_41_50_51_52_63","Great Lakes Coastal Marsh Systems","Riparian",NA,NA,NA,NA,NA,NA,NA,NA,122,245,202,0.478431,0.960784,0.792157
+"30",1613,3820,14940,"41","14940_41_50_51","Laurentian-Acadian Shrub-Herbaceous Wetland Systems","Riparian",18,NA,NA,18,100,NA,NA,"II-C",0,168,107,0,0.658824,0.419608
+"31",1614,23636687,13022,"51","13022_41_50_51","Laurentian-Acadian Northern Hardwoods Forest-Hemlock","Hardwood",2040,NA,NA,2040,100,NA,NA,"V-B",76,230,0,0.298039,0.901961,0
+"32",1615,10455096,13022,"51","13022_41_50_51","Laurentian-Acadian Northern Hardwoods Forest-Hemlock","Hardwood",2040,NA,NA,2040,100,NA,NA,"V-B",76,230,150,0.298039,0.901961,0.588235
+"33",1616,457856,13023,"51","13023_51","Laurentian-Acadian Northern Hardwoods Forest-Northern Sugar Maple-Basswood ","Hardwood",1016,NA,NA,1016,100,NA,NA,"V-B",38,105,0,0.14902,0.411765,0
+"34",1617,8362066,13100,"51","13100_51","North-Central Interior Dry-Mesic Oak Forest and Woodland","Hardwood",161,160,11,9,6,6,88,"I-B",176,163,222,0.690196,0.639216,0.870588
+"35",1618,3073953,13110,"51","13110_51","North-Central Interior Dry Oak Forest and Woodland","Hardwood",137,111,11,9,7,8,85,"I-B",179,207,143,0.701961,0.811765,0.560784
+"36",1619,28583282,13130,"51","13130_47_50_51","North-Central Interior Beech-Maple Forest","Hardwood",1004,NA,836,456,45,NA,55,"V-A",0,156,44,0,0.611765,0.172549
+"37",1620,2946699,13441,"51","13441_51","Boreal Jack Pine-Black Spruce Forest-Pine Barrens","Conifer",34,64,7,5,15,8,77,"I-A",255,140,140,1,0.54902,0.54902
+"38",1621,301620,13442,"51","13442_51","Boreal Jack Pine-Black Spruce Forest-Spruce-Fir","Conifer",112,NA,NA,112,100,NA,NA,"IV-B",135,200,114,0.529412,0.784314,0.447059
+"39",1622,14317213,13620,"51","13620_51_63_64_65_66","Laurentian-Acadian Northern Pine(-Oak) Forest","Hardwood-Conifer",309,447,65,48,16,11,73,"III-A",255,191,191,1,0.74902,0.74902
+"40",1623,5708965,13651,"51","13651_51","Boreal White Spruce-Fir-Hardwood Forest-Inland","Conifer",490,524,NA,253,52,48,NA,"V-A",147,194,114,0.576471,0.760784,0.447059
+"41",1624,3322554,13652,"51","13652_51","Boreal White Spruce-Fir-Hardwood Forest-Coastal","Conifer",872,1306,NA,523,60,40,NA,"V-B",110,137,70,0.431373,0.537255,0.27451
+"42",1625,8654110,13660,"51","13660_51_63_64_65_66","Laurentian-Acadian Pine-Hemlock-Hardwood Forest","Hardwood-Conifer",482,998,289,153,32,15,53,"III-B",208,255,99,0.815686,1,0.388235
+"43",1626,1060474,13940,"51","13940_50_51","North-Central Interior Oak Savanna","Hardwood",66,184,5,5,7,3,90,"I-A",230,213,138,0.901961,0.835294,0.541176
+"44",1627,6854696,13950,"51","13950_51","North-Central Oak Barrens","Hardwood",49,180,6,5,10,3,87,"I-A",255,235,176,1,0.921569,0.690196
+"45",1628,4695456,14071,"51","14071_41_50_51","Laurentian Pine-Oak Barrens","Hardwood-Conifer",109,75,5,4,4,6,90,"I-A",153,66,0,0.6,0.258824,0
+"46",1629,612007,14072,"51","14072_41_50_51","Laurentian Pine-Oak Barrens-Jack Pine","Conifer",25,46,18,8,34,18,48,"I-B",153,66,100,0.6,0.258824,0.392157
+"47",1630,642676,14110,"51","14110_49_51_52","Great Lakes Wet-Mesic Lakeplain Prairie","Riparian",24,NA,NA,24,100,NA,NA,"II-C",235,255,0,0.921569,1,0
+"48",1631,311707,14120,"51","14120_39_40_41_42_43_50_51","North-Central Interior Sand and Gravel Tallgrass Prairie","Grassland",4,NA,87,3,96,NA,4,"II-A",214,0,157,0.839216,0,0.615686
+"49",1632,519881,14210,"51","14210_31_38_42_43_44_50_51","Central Tallgrass Prairie","Grassland",4,NA,NA,4,100,NA,NA,"II-A",232,255,196,0.909804,1,0.768627
+"50",1633,405466,14440,"51","14440_41_50_51","Eastern Boreal Floodplain","Hardwood",NA,581,312,203,NA,35,65,"V-A",69,69,156,0.270588,0.270588,0.611765
+"51",1634,62209,14660,"51","14660_50_51","Great Lakes Wooded Dune and Swale","Riparian",3715,536,NA,468,13,87,NA,"V-A",181,0,0,0.709804,0,0
+"52",1635,4845318,14710,"51","14710_51_62","Central Interior and Appalachian Floodplain Systems","Riparian",NA,429,67,58,NA,14,86,"III-A",0,191,176,0,0.74902,0.690196
+"53",1636,1159843,14750,"51","14750_41_50_51_63_64_65_66","Laurentian-Acadian Floodplain Systems","Riparian",NA,435,68,59,NA,14,86,"III-A",122,143,245,0.478431,0.560784,0.960784
+"54",1637,6260610,14770,"51","14770_40_41_50_51","Boreal Acidic Peatland Systems","Riparian",716,NA,123,105,15,NA,85,"III-B",106,0,138,0.415686,0,0.541176
+"55",1638,2567755,14790,"51","14790_41_42_47_48_50_51_53","Central Interior and Appalachian Swamp Systems","Riparian",987,NA,NA,987,100,NA,NA,"V-B",207,61,255,0.811765,0.239216,1
+"56",1639,16982598,14810,"51","14810_41_50_51_63","Laurentian-Acadian Alkaline Conifer-Hardwood Swamp","Riparian",989,NA,NA,989,100,NA,NA,"V-B",232,189,255,0.909804,0.741176,1
+"57",1640,203746,14920,"51","14920_41_50_51_52_63","Great Lakes Coastal Marsh Systems","Riparian",NA,NA,NA,NA,NA,NA,NA,NA,122,245,202,0.478431,0.960784,0.792157
+"58",1641,11955,14940,"51","14940_41_50_51","Laurentian-Acadian Shrub-Herbaceous Wetland Systems","Riparian",18,NA,NA,18,100,NA,NA,"II-C",0,168,107,0,0.658824,0.419608
+"59",1965,391453,13100,"52","13100_52","North-Central Interior Dry-Mesic Oak Forest and Woodland","Hardwood",75,47,23,13,17,27,56,"I-B",176,163,222,0.690196,0.639216,0.870588
+"60",1966,19933,13110,"52","13110_52","North-Central Interior Dry Oak Forest and Woodland","Hardwood",149,151,11,9,6,6,88,"I-B",179,207,143,0.701961,0.811765,0.560784
+"61",1967,774508,13130,"52","13130_49_52_62","North-Central Interior Beech-Maple Forest","Hardwood",1026,NA,852,465,45,NA,55,"V-A",0,156,44,0,0.611765,0.172549
+"62",1968,15099,13940,"52","13940_52","North-Central Interior Oak Savanna","Hardwood",552,187,5,5,1,3,96,"I-A",230,213,138,0.901961,0.835294,0.541176
+"63",1969,223402,13950,"52","13950_41_42_43_49_52","North-Central Oak Barrens","Hardwood",341,246,5,5,1,2,97,"I-A",255,235,176,1,0.921569,0.690196
+"64",1970,17506,14110,"52","14110_49_51_52","Great Lakes Wet-Mesic Lakeplain Prairie","Riparian",24,NA,NA,24,100,NA,NA,"II-C",235,255,0,0.921569,1,0
+"65",1972,241,14210,"52","14210_49_52","Central Tallgrass Prairie","Grassland",4,NA,NA,4,100,NA,NA,"II-A",232,255,196,0.909804,1,0.768627
+"66",1973,50470,14710,"52","14710_49_52","Central Interior and Appalachian Floodplain Systems","Riparian",NA,426,68,59,NA,14,86,"III-A",0,191,176,0,0.74902,0.690196
+"67",1974,618367,14790,"52","14790_52_62","Central Interior and Appalachian Swamp Systems","Riparian",989,NA,NA,989,100,NA,NA,"V-B",207,61,255,0.811765,0.239216,1
+"68",1975,57727,14920,"52","14920_41_50_51_52_63","Great Lakes Coastal Marsh Systems","Riparian",NA,NA,NA,NA,NA,NA,NA,NA,122,245,202,0.478431,0.960784,0.792157
+"69",1976,12170,14930,"52","14930_52_62","Central Interior and Appalachian Shrub-Herbaceous Wetland Systems","Riparian",17,NA,NA,17,100,NA,NA,"II-C",240,150,20,0.941176,0.588235,0.078431
+"70",1977,72681,15180,"52","15180_43_47_49_52_62_63_64_65","North-Central Interior Wet Flatwoods","Hardwood",993,NA,NA,993,100,NA,NA,"V-B",211,237,38,0.827451,0.929412,0.14902
+"71",2017,126102,13100,"49","13100_49","North-Central Interior Dry-Mesic Oak Forest and Woodland","Hardwood",75,47,23,13,17,27,56,"I-B",176,163,222,0.690196,0.639216,0.870588
+"72",2018,26766,13110,"49","13110_49","North-Central Interior Dry Oak Forest and Woodland","Hardwood",149,149,11,9,7,6,87,"I-B",179,207,143,0.701961,0.811765,0.560784
+"73",2019,29953,13130,"49","13130_49_52_62","North-Central Interior Beech-Maple Forest","Hardwood",1026,NA,852,465,45,NA,55,"V-A",0,156,44,0,0.611765,0.172549
+"74",2020,17760,13140,"49","13140_49","North-Central Interior Maple-Basswood Forest","Hardwood",1030,NA,845,464,45,NA,55,"V-A",237,161,102,0.929412,0.631373,0.4
+"75",2024,239,13940,"49","13940_44_49","North-Central Interior Oak Savanna","Hardwood",550,189,5,5,1,3,96,"I-A",230,213,138,0.901961,0.835294,0.541176
+"76",2028,7,14120,"49","14120_49","North-Central Interior Sand and Gravel Tallgrass Prairie","Grassland",4,NA,87,3,96,NA,4,"II-A",214,0,157,0.839216,0,0.615686
+"77",2029,86898,14210,"49","14210_49_52","Central Tallgrass Prairie","Grassland",4,NA,NA,4,100,NA,NA,"II-A",232,255,196,0.909804,1,0.768627
+"78",2031,59421,14660,"49","14660_49","Great Lakes Wooded Dune and Swale","Riparian",2663,533,NA,444,17,83,NA,"V-A",181,0,0,0.709804,0,0
+"79",2033,16081,14710,"49","14710_49_52","Central Interior and Appalachian Floodplain Systems","Riparian",NA,426,68,59,NA,14,86,"III-A",0,191,176,0,0.74902,0.690196
+"80",2034,13690,14720,"49","14720_49","Central Interior and Appalachian Riparian Systems","Riparian",996,NA,198,165,17,NA,83,"III-B",36,255,20,0.141176,1,0.078431
+"81",2036,191,15180,"49","15180_43_47_49_52_62_63_64_65","North-Central Interior Wet Flatwoods","Hardwood",993,NA,NA,993,100,NA,NA,"V-B",211,237,38,0.827451,0.929412,0.14902
+"82",2726,104489,13622,"50","13622_41_50","Laurentian-Acadian Northern Pine(-Oak) Forest-Pine Dominated","Hardwood-Conifer",230,NA,40,34,15,NA,85,"I-C",255,167,127,1,0.654902,0.498039

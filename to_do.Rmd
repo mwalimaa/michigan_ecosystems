@@ -1,0 +1,34 @@
+---
+title: "TO DO"
+author: "Randy Swaty"
+date: "2022-11-23"
+output: html_document
+---
+
+
+TO DO ON DA DASH:
+
+<!-- 1. remove area of interest tab -->
+<!--     * make index (Welcome!) page formatted with a column -->
+<!--     * put text from AoI tab on Welcome tab -->
+<!--     * put map on AoI on to welcome tab -->
+2. Actually...how about combining Welcome, Area of Interest AND Looking Back tabs?
+3. Make all charts and maps accessible
+    * change colors
+    * larger fonts
+4. Consider not using Plotly, or:
+    * BpS/EVT chart
+        * remove vertical axis label
+        * change pop-ups 
+        * change legend title to "Broad vegetation types"
+        * commas on horizontal axis numbers
+5. Consider scrolling pages with map and chart together OR with GGPLOT you could insert map into chart (https://stackoverflow.com/questions/9917049/inserting-an-image-to-ggplot2)
+
+RELOOK AFTER ALL OF THIS
+
+6. edit all text once architecture is solidified
+        
+        
+        
+        
+        
