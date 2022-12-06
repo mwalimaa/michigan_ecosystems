@@ -3,6 +3,21 @@ title: "Michigan Ecosystem Explorer"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
+    theme:
+      version: 4
+      bg: "#101010"
+      fg: "#FDF7F7" 
+      primary: "#5ea8bd"
+      navbar-bg: "#a3a2a2"
+      base_font: 
+        google: Prompt
+      heading_font:
+        google: Sen
+      code_font:
+        google: 
+          # arguments to sass::font_google() 
+          family: JetBrains Mono
+          local: false
 ---
 
 ```{r setup, include=FALSE}
@@ -12,29 +27,27 @@ library(flexdashboard)
 
 ### Welcome! {data-commentary-width=500}
 
-```{r}
+```{r out.height="40%"}
 library(tmap)
 library(sf)
 library(tidyverse)
-library(raster)
 
-shp <- st_read("./us_state_bounds/tl_2022_us_state.shp", quiet = T) %>%
-  filter(NAME == "Michigan")
+shp <- st_read("./us_state_bounds/michigan500k.shp", quiet = T) 
 tmap_mode("view")
 tm_shape(shp) +
-  tm_borders(col = "gray", lwd = 4) +
-  tm_basemap("Esri.WorldImagery")
+  tm_borders(col = "gray", lwd = 2) +
+  tm_basemap("Esri.WorldImagery") + 
+  tm_view(set.view = c(-84, 8, 4))
 
 ```
 
 ***
-<font size = "4"> Dashboard by Myles Walimaa and Randy Swaty </font>  
+<font size = "4"> Exploring Michigan's Ecosystems, Past and Present </font>  
 
-This idea was initially designed by [Randy Swaty](mailto:rswaty@tnc.org) as an alternative to a PowerPoint presentation. There was interest in building on this idea in the conservation community and I, [Myles Walimaa](mailto:mwalimaa@gmail.com), made some updates with newer data and new charts. This can certainly be built upon and these workflows may be used for any area of interest. The State of Michigan is the target area for this dashboard, since it is where both Randy and I have lived for years.  
+Presented as an alternative to a PowerPoint presentation, we ([Myles Walimaa](mailto:mwalimaa@gmail.com) and [Randy Swaty](mailto:rswaty@tnc.org) ) hope to orient you to Michigan's ecosystems as they were just prior to European Colonization and as of ~2020. This can certainly be built upon and these workflows may be used for any area of interest. The State of Michigan is the target area for this dashboard, since it is where both Randy and I have lived for years.  
 
 Randy is an ecologist for The Nature Conservancy and I am a former National Park Service employee. We both work with the [Conservation Data Lab](https://conservationdatalab.org/) to mentor students in the art of computer coding and data visualization, particularly for conservation purposes.  
 
-The purpose of this dashboard is to explore the major ecosystems of Michigan's past and how they have changed.  
 As you explore, ask yourself some of these questions:  
 
 * What is an "ecosystem" to you? How coarse or fine should we define these?  
@@ -44,47 +57,55 @@ As you explore, ask yourself some of these questions:
 * Are there any trends that you have noticed, based off the data presented?
 
 <font size = "3"> *PLEASE read the disclaimers on each slide explaining the assumptions with each dataset. This is meant for exploratory purposes only.*</font>  
-
-**Michigan**  
-
-- Michigan is located in America's "midwest" region, one of the more northern states.  
-
-- It shares borders with Ohio, Indiana, Illinois (nautical), and Wisconsin, as well as international borders with Canada.  
-
-- It contains two peninsulas (upper and lower) separated by the Mackinac Bridge. Residents north of the bridge are called "Yoopers", and residents south/below the bridge are called "Trolls".  
-
-- It is also called the "Great Lakes State", as it borders 4/5 of the Laurentian Great Lakes.  
-
-- It is home to Detroit, the Motor City, as well as the birthplace of [Motown](https://www.youtube.com/watch?v=8Ff2Z0Dq2sg).  
-
-- There are 62 million acres of land within its political borders.  
-
-- Isle Royale National Park is Michigan's only National Park (proper) and is the least visited park in the NPS system, as it takes a 5 hour ferry ride to get to the incredibly remote island.  
+  
 
 
-### Looking Back {data-commentary-width=500}
+### The Past {data-commentary-width=500}
 
 ```{r}
 
-
+# greasy removed barren from raw data
 library(tidyverse)
+library(plotly)
 options(scipen = 999)
 
 bps_att3 <- read.csv("./outputs/bps_att_chart.csv") %>%
-  top_n(25)
+  top_n(30)
 
 chart2 <- ggplot(data = bps_att3, aes(fill = GROUPVEG, y = acres, x = reorder(BPS_NAME, acres))) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  labs(title = "Top 25 Historic Ecosystems in Michigan",
+  labs(title = "Top 30 Historic Ecosystems in Michigan",
        x = "",
        y = "Acres",
-       fill = "Ecosystem Type") +
+       fill = "Course \nVegetation \nClassification") +
   theme_light() +
-  scale_fill_manual(values = c("#117733", "#cc6677", "#119d74", "#999933", "#25bfde")) +
-  scale_y_continuous(labels = scales::comma)
+  scale_fill_manual(values = c(
+    "#032B0B", # conifer
+    "#f98517", # grassland
+    "#73A07C", # hardwood
+    "#9b54f3", # hardwood-conifer
+    "#0050ae"  # riparian
+   )) 
 
-ichart2 <- plotly::ggplotly(chart2) %>% plotly::style(hoverinfo = "none")
+
+ichart2 <- plotly::ggplotly(chart2, tooltip = c("x", "y", "fill", "total")) %>% 
+  plotly::style(hoverinfo = "none" ) 
+  
+
+ichart2  %>%
+  layout(
+    images = list(
+      source = base64enc::dataURI(file = "bps-gv-greasy.png"),
+      x = 0.40, y = 0.10, 
+      sizex = .5, sizey = .5,
+      xref = "paper", yref = "paper", 
+      xanchor = "left", yanchor = "bottom"
+    ),
+    margin = list(t = 50)
+  )
+
+
 ichart2
 
 
@@ -92,83 +113,168 @@ ichart2
 
 
 ***
-**DISCLAIMER:**  
-This map was created using LANDFIRE's BioPhysical Settings. As there was no satellite imagery 300 years ago, this is a *model* of what the historical ecosystems looked like based soil types, climate, elevation, ecological succession, among many other datasets.  
+**Observations and the dataset**
+Historically, Michigan was dominated by hardwood-dominated ecosystems, with a substantial showing of wetland  (refered to as "riparian" in the source data set) conifer and mixed hardwood-conifer types.
 
-- This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.  
+This map was created using LANDFIRE's [Biophysical Settings](https://landfire.gov/bps.php). As there was no satellite imagery 300 years ago, this is a *model* of what the historical ecosystems looked like based soil types, climate, elevation, ecological succession, among many other datasets. The original data displayed plots of 30m x 30m squares that we call "pixels", and Michigan has over 500 million of them! 
 
-- This is coarse ecosystem representation since it is difficult to display several dozen ecosystem types on a single map.  
-
-- The original data displayed plots of 30m x 30m squares that we call "pixels", and Michigan has over 500 million of them!  
-
-- This map has much lower pixel resolution than mentioned above, again to simply give you an idea of what things may have looked like without going into great detail.  
 
 This is what we think the distribution of ecosystems looked like prior to European settlement. The caretakers of this land at the time were the indigenous natives who called the Great Lakes their home. They recognized the value of fire for regeneration and resiliency, often performing "prescribed" burns to keep their home strong and healthy.  
 
-- Can you think of non-anthroprogenic disturbances to these ecosystems?  
 
 Explore this map created by [Native Land Digital](https://native-land.ca/) to learn more about which tribes were located where. Botanist Robin Wall Kimmerer's book [Braiding Sweetgrass](https://milkweed.org/book/braiding-sweetgrass) provides valuable insight on the traditional ways the natives connected with the land, largely through combining ancient philosophy and modern science.
 
-**DISCLAIMER:**  
-This chart was created using LANDFIRE's BioPhysical Settings. As there was no satellite imagery 300 years ago, this is a *model* of what the historical ecosystems looked like based soil types, climate, elevation, ecological succession, among many other datasets.  
+**DISCLAIMER:** 
 
-- BioPhysical Settings (BPS) have a "fine" scale classification called "BPS_NAME" and a "coarse" scale classification called "GROUPVEG".
+- This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
+- 'Riparian' types include all wetlands.  
+- Download map of coarse ecosystems [here]()
+
+
+
+### Present {data-commentary-width=500}
+
+```{r}
+library(tidyverse)
+options(scipen = 999)
+
+
+evt_att3 <- read.csv("./outputs/evt_att_chart.csv") %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Developed"), "Developed"),
+         EVT_NAME = replace(EVT_NAME, str_detect(EVT_NAME, "Developed"), "Developed")) %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Exotic"), "Exotic"),
+         EVT_NAME = replace(EVT_NAME, str_detect(EVT_NAME, "Exotic"), "Exotic")) %>%
+  mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Quarries"), "Mineland"),
+         EVT_NAME = replace(EVT_NAME, str_detect(EVT_NAME, "Quarries"), "Mineland")) %>%
+  group_by(EVT_NAME, EVT_PHYS) %>%
+  summarise(Freq = sum(Freq),
+            acres = sum(acres)) %>%
+  arrange(desc(acres)) %>%
+  as.data.frame() %>%
+  top_n(30)
+
+chart3 <- ggplot(data = evt_att3, aes(fill = EVT_PHYS, y = acres, x = reorder(EVT_NAME, acres))) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 30 Current Ecosystems in Michigan",
+       x = "",
+       y = "Acres",
+       fill = "Course \nVegetation \nClassification") +
+  theme_light()   + 
+  scale_fill_manual(values = c(
+    "#FFFF73", # agricultural
+    "#032B0B", # conifer ?
+    "#9b54f3", # conifer-hardwood
+    "#b1b2b3",  # developed?
+    "#730000", # exotic
+    "#73A07C", # hardwood
+    "#0050ae"  # riparian
+   )) 
+
+  
+  chart3
+
+ichart3 <- plotly::ggplotly(chart3, tooltip = c("x", "y", "fill", "total")) %>% 
+  plotly::style(hoverinfo = "none" ) 
+
+ichart3  %>%
+  layout(
+    images = list(
+      source = base64enc::dataURI(file = "evt-gv-greasy.png"),
+      x = 0.40, y = 0.10, 
+      sizex = .45, sizey = .45,
+      xref = "paper", yref = "paper", 
+      xanchor = "left", yanchor = "bottom"
+    ),
+    margin = list(t = 50)
+  )
+
+ichart3 <- plotly::ggplotly(chart3, tooltip = c("x", "y", "fill", "total"))
+
+
+ichart3
+
+```
+
+***
+
+**DISCLAIMER:**  
+This chart was created using LANDFIRE's Existing Vegetation Type. This uses satellite imagery, ground assessment, and other methods to describe current "ecosystems" (or lack thereof). I grouped all the developed sub-categories into a single "Developed" classification.  
+
+- Existing Vegetation Type (EVT) has a "fine" scale classification called "EVT_NAME" and a "coarse" scale classification called "EVT_PHYS".  
 
 - The acreages were calculated based on the quantity of 900m^2^ pixels (30m x 30m), which was converted to acres.  
 
-- When you hover, you can see how many acres of each ecosystem used to exist (roughly).  
+- When you hover, you can see how many acres of each ecosystem exists (roughly).  
 
 - Use your mouse to zoom in on smaller areas by drawing a box.  
 
 - You can reset the zoom by clicking the "house" icon at the top left of the chart.  
 
-How accurate do you think this chart is?  
+Does anything jump out to you as surprising?  
 
-Do you think BPS_NAME or GROUPVEG has higher accuracy in describing ecosystems?  
+Should "ruderal" ecosystems be classified as agriculture, exotic, or something else? Disturbed?  
 
-Take "North-Central Interior Beech-Maple Forest" for example:  
+What do you notice about the historical and current ratios of conifers-to-hardwoods?  
 
-- GROUPVEG says this is mostly hardwoods, would you agree?  
-- Do you think these pixels contain *only* Beech and Maple trees?  
-- What is the ratio of Beech-to-Maple in these forests? Do you think it varies?  
-
-
-The point is that this is *not* a perfect representation, although it helps us gain a general understanding of what probably was going on several hundred years ago. If you want to explore the BPS dataset further, you can find [information here](https://www.landfire.gov/bps.php) and **Randy knows where there is a .pdf or something that has descriptions of what all the silly BPS_NAMEs mean, with examples of what kind of things will probably be found there... right??? LIKE THE EVT ONE??? IT MUST EXIST SOMEWHERE**
+Again, this is *not* a perfect representation of today's conditions and is meant for scales of several thousand+ acres. If you want to explore the EVT dataset further, you can find [information here](https://www.landfire.gov/evt.php) and can read about its development. There is a nifty [handbook](https://www.landfire.gov/documents/LANDFIRE_Ecological_Systems_Descriptions_CONUS.pdf) that discusses each ecosystem classification in a fair amount of depth, so you may get a better idea of what you may find there.
 
 
 
-### Visual Exploration of Change {data-commentary-width=500}
+
+### Exploring Change {data-commentary-width=500}
 
 ```{r}
 library(tidyverse)
 c2 <- read.csv("./outputs/bps2scl.csv")
 
-
 c3 <- c2  %>%
+  # group_by(BPS_NAME) %>%
+  # summarise(sumf = sum(freq)) %>%
+  # left_join(c2, by = "BPS_NAME") %>%
+  # select(BPS_NAME, SCL_V, sumf, freq) %>%
   group_by(BPS_NAME, SCL_V) %>%
   summarise(freq = sum(freq)) %>%
   as.data.frame() %>%
   mutate(SCL_V = replace(SCL_V, str_detect(SCL_V, "Ag"), "Agricultural")) %>%
-  mutate(acres = as.integer(round(freq * 900 / 4046.85)),
+  mutate(acres = round(freq * 900 / 4046.85),
          SCL_V = factor(c(SCL_V), levels= c("Agricultural", "Developed", "Other", "NatVeg")))
 
-c25 <- c3 %>% group_by(BPS_NAME) %>% summarise(total = sum(acres)) %>%
-  arrange(desc(total)) %>% top_n(25) %>% pull(BPS_NAME)
+#levels(c3$SCL_V) <- rev(levels(c3$SCL_V))
 
-c4 <- c3 %>% filter(BPS_NAME %in% c25)
-
-
-chart <- ggplot(data = c4, aes(fill = SCL_V, y = acres, x = reorder(BPS_NAME, acres))) +
+chart <- ggplot(data = c3, aes(fill = SCL_V, y = acres, x = reorder(BPS_NAME, acres))) +
   geom_bar(position = "stack", stat = "identity") +
   coord_flip() +
-  scale_fill_manual(values = c("#e2ca1b", "#515151", "#cd7220", "#117733")) +
-  labs(title = "Top 25 Historic Ecosystems and How They Changed",
+  scale_fill_manual(values = c(
+    "#FFFF73", # agricultural
+    "#CCCCCC", # developed
+    "#33a02c", # Other-changed ecosystem
+    "#4A3DAE"  # Natural Veg
+    )) +
+  labs(title = "Top 30 Historic Ecosystems and How They Changed",
        x = "",
        y = "Acres",
-       fill = "Change Type") +
-  scale_y_continuous(labels = scales::comma) +
+       fill = "Land Cover Type") +
   theme_light()
-ichart <- plotly::ggplotly(chart) %>% plotly::style(hoverinfo = "none")
+
+
+ichart <- plotly::ggplotly(chart, tooltip = c("x", "y", "fill", "total"))
+
+ichart  %>%
+  layout(
+    images = list(
+      source = base64enc::dataURI(file = "docs/dash/conversion.png"),
+      x = 0.40, y = 0.10, 
+      sizex = .45, sizey = .45,
+      xref = "paper", yref = "paper", 
+      xanchor = "left", yanchor = "bottom"
+    ),
+    margin = list(t = 50)
+  )
+
+
+
+
 ichart
 ```
 
@@ -195,28 +301,13 @@ Are there any ecosystems that might be close to disappearing completely?
 
 
 
-**DISCLAIMER:**
-The assumptions made in this map are that *if* the ecosystems are no longer following the trajectory of natural ecological succession, *then* they have been converted into something unnatural. This map does not consider ecosystems changing from one to another as that may happen naturally, only change into non-native, mineland, agriculture, development, or the like.  
-
-
-- 50.1% of ecosystems remain Natural Vegetation  
-
-- 25.9% of ecosystems have been converted to Agriculture  
-
-- 13.0% of ecosystems have been Developed in one way or another  
-
-- 11.0% of ecosystems have changed in Other ways  
-
-Where has most of the ecosystem conversion taken place?  
-
-To what category have most of the ecosystems converted? What used to be there?  
-
-
 ### Coarse Look at Conversion {data-commentary-width=500}
 
 ```{r}
 library(tidyverse)
 c <- read.csv("./outputs/bps2evt.csv")
+
+library(htmltools)
 
 # finding GROUPVEG categories
 group <- c %>% group_by(GROUPVEG) %>% 
@@ -225,7 +316,7 @@ group <- c %>% group_by(GROUPVEG) %>%
   pull(GROUPVEG)
 
 # grouping combine and filter
-data <- c %>% dplyr::select(GROUPVEG, EVT_PHYS, Freq.x, Freq.y, freq) %>% 
+data <- c %>% select(GROUPVEG, EVT_PHYS, Freq.x, Freq.y, freq) %>% 
   mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Developed"), "Developed")) %>%
   mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Exotic"), "Exotic")) %>%
   mutate(EVT_PHYS = replace(EVT_PHYS, str_detect(EVT_PHYS, "Quarries"), "Mineland")) %>%
@@ -250,20 +341,32 @@ nodes <- data.frame(
 data$IDsource <- match(data$source, nodes$name) - 1
 data$IDtarget <- match(data$target, nodes$name) - 1
 
-cols <- "d3.scaleOrdinal() .domain(['Conifer (past)', 'Grassland (past)', 'Hardwood (past)', 'Hardwood-Conifer (past)', 'Riparian (past)', 'Agricultural (present)', 'Conifer (present)', 'Conifer-Hardwood (present)', 'Developed (present)', 'Exotic (present)', 'Grassland (present)', 'Mineland (present)', 'Riparian (present)', 'Shrubland (present)']) .range(['#cc6677', '119d74', '#999933', '#25bfde', '#e2ca1b', '#999933', '#515151', 'cd7220', '#cd7220', '#cd7220', '#cd7220', 'red', 'yellow', 'blue', '#117733'])"
+browsable(
+  tags$div(
+    style = "background-color:#FFFFFF;",
+    networkD3::sankeyNetwork(Links = data,
+                         Nodes = nodes,
+                         Source = "IDsource",
+                         Target = "IDtarget",
+                         Value = "value",
+                         NodeID = "name",
+                         fontSize = 14,
+                         iterations = 0)
+  )
+)
 
-snky <- networkD3::sankeyNetwork(Links = data,
-                                 Nodes = nodes,
-                                 Source = "IDsource",
-                                 Target = "IDtarget",
-                                 Value = "value",
-                                 NodeID = "name",
-                                 fontSize = 14,
-                                 iterations = 0,
-                                 sinksRight = F,
-                                 width = 6,
-                                 colourScale = cols)
-snky
+
+
+# snky <- networkD3::sankeyNetwork(Links = data,
+#                                  Nodes = nodes,
+#                                  Source = "IDsource",
+#                                  Target = "IDtarget",
+#                                  Value = "value",
+#                                  NodeID = "name",
+#                                  fontSize = 14,
+#                                  iterations = 0,
+#                                  sinksRight = F)
+# snky
 ```
 
 ***
@@ -300,21 +403,10 @@ t1 <- t %>%
   group_by(BPS_NAME, EVT_NAME, GROUPVEG, EVT_PHYS) %>%
   summarise(freq = sum(freq)) %>%
   mutate(ACRES = round(freq * 900 / 4046.86)) %>%
-  dplyr::select(BPS_NAME, GROUPVEG, ACRES, EVT_PHYS, EVT_NAME) %>%
+  select(BPS_NAME, GROUPVEG, ACRES, EVT_PHYS, EVT_NAME) %>%
   arrange(desc(ACRES))
             
-#t2 <- reactable::reactable(t1, defaultPageSize = 15, filterable = T, searchable = T)
-t2 <- DT::datatable(t1, extensions = "Buttons", options = list(paging = T,
-                                                               scrollX = T,
-                                                               lengthMenu = c(15, 30, 50, 100),
-                                                               pageLength = 15,
-                                                               autoWidth = T,
-                                                               searching = T,
-                                                               ordering = T,
-                                                               dom = "Bfrtip",
-                                                               buttons = c("csv", "excel"))) %>%
-  DT::formatCurrency("ACRES", currency = "", interval = 3, mark = ",", digits = 0)
-
+t2 <- reactable::reactable(t1, defaultPageSize = 15, filterable = T, searchable = T)
 t2
 ```
 
