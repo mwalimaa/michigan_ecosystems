@@ -124,12 +124,11 @@ This map was created using LANDFIRE's [Biophysical Settings](https://landfire.go
 This is what we think the distribution of ecosystems looked like prior to European settlement. The caretakers of this land at the time were the indigenous natives who called the Great Lakes their home. They recognized the value of fire for regeneration and resiliency, often performing "prescribed" burns to keep their home strong and healthy.  
 
 
-Explore this map created by [Native Land Digital](https://native-land.ca/) to learn more about which tribes were located where. Botanist Robin Wall Kimmerer's book [Braiding Sweetgrass](https://milkweed.org/book/braiding-sweetgrass) provides valuable insight on the traditional ways the natives connected with the land, largely through combining ancient philosophy and modern science.
+Explore this map created by [Native Land Digital](https://native-land.ca/) to learn more about which tribes were located where. Botanist Robin Wall Kimmerer's book [Braiding Sweetgrass](https://milkweed.org/book/braiding-sweetgrass) provides valuable insight on the traditional ways the natives connected with the land.
 
 **DISCLAIMER:** 
 
 - This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
-- 'Riparian' types include all wetlands.  
 
 - Download map of coarse historical ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/raw/main/bps-gv-greasy.png)
 
@@ -217,7 +216,7 @@ What do you notice about the historical and current ratios of conifers-to-hardwo
 
 - I grouped all the developed sub-categories into a single "Developed" classification.
 
-- Download a map of the coarse present ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/evt-gv-greasy.png)
+- Download a map of the coarse present ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/raw/main/evt-gv-greasy.png)
 
 
 ### Exploring Change {data-commentary-width=500}
@@ -296,7 +295,7 @@ Are there any ecosystems that might be close to disappearing completely?
 **DISCLAIMER:**
 Changes may be due to 'real' changes on the ground, or may be due to differences in mapping methods between the past and present datasets.  
 
-The map only depicts Agricultural and Developed land cover types.  Map may be downloaded [here]([https://github.com/rswaty/mi_ecosystems-main/blob/main/conversion.png](https://raw.githubusercontent.com/rswaty/mi_ecosystems-main/main/conversion.png))
+The map only depicts Agricultural and Developed land cover types.  Map may be downloaded [here](https://raw.githubusercontent.com/rswaty/mi_ecosystems-main/main/conversion.png)
 
 
 
