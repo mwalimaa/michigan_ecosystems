@@ -129,12 +129,8 @@ Explore this map created by [Native Land Digital](https://native-land.ca/) to le
 
 - This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
 - 'Riparian' types include all wetlands.  
-<<<<<<< HEAD
-- Download map of coarse ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/bps-gv-greasy.png )
-=======
-- Download map of coarse ecosystems <a href="bps-gv-greasy.png" download>here </a>
->>>>>>> dd2610b21ee39f9a77adaac4f573f0818b61db73
 
+- Download map of coarse historical ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/bps-gv-greasy.png )
 
 
 ### Present {data-commentary-width=500}
@@ -218,6 +214,8 @@ What do you notice about the historical and current ratios of conifers-to-hardwo
 - Again, this is *not* a perfect representation of today's conditions and is meant for scales of several thousand+ acres. If you want to explore the EVT dataset further, you can find [information here](https://www.landfire.gov/evt.php) and can read about its development. There is a nifty [handbook](https://www.landfire.gov/documents/LANDFIRE_Ecological_Systems_Descriptions_CONUS.pdf) that discusses each ecosystem classification in a fair amount of depth, so you may get a better idea of what you may find there.
 
 - I grouped all the developed sub-categories into a single "Developed" classification.
+
+- Download a map of the coarse present ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/evt-gv-greasy.png)
 
 
 ### Exploring Change {data-commentary-width=500}
