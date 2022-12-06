@@ -130,7 +130,7 @@ Explore this map created by [Native Land Digital](https://native-land.ca/) to le
 - This was intentionally non-interactive simply to give you a broad visual of what things probably looked like.
 - 'Riparian' types include all wetlands.  
 
-- Download map of coarse historical ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/bps-gv-greasy.png )
+- Download map of coarse historical ecosystems [here](https://github.com/rswaty/mi_ecosystems-main/raw/main/bps-gv-greasy.png)
 
 
 ### Present {data-commentary-width=500}
@@ -203,7 +203,7 @@ ichart3
 This chart was created using LANDFIRE's [Existing Vegetation Type](https://landfire.gov/evt.php). This uses satellite imagery, ground assessment, and other methods to describe current "ecosystems" (or lack thereof).  The main pattern to note is the substantial amount of agricultural types on the landscape today.   
 
 
-- Existing Vegetation Type (EVT) has a "fine" scale classification called "EVT_NAME" and a "coarse" scale classification called "EVT_PHYS".  The map and the chart are based on "EVT_PHYS"
+Existing Vegetation Type (EVT) has a "fine" scale classification called "EVT_NAME" and a "coarse" scale classification called "EVT_PHYS".  The map and the chart are based on "EVT_PHYS"
 
 Does anything jump out to you as surprising?  
 
@@ -400,10 +400,21 @@ t1 <- t %>%
   group_by(BPS_NAME, EVT_NAME, GROUPVEG, EVT_PHYS) %>%
   summarise(freq = sum(freq)) %>%
   mutate(ACRES = round(freq * 900 / 4046.86)) %>%
-  select(BPS_NAME, GROUPVEG, ACRES, EVT_PHYS, EVT_NAME) %>%
+  dplyr::select(BPS_NAME, GROUPVEG, ACRES, EVT_PHYS, EVT_NAME) %>%
   arrange(desc(ACRES))
             
-t2 <- reactable::reactable(t1, defaultPageSize = 15, filterable = T, searchable = T)
+#t2 <- reactable::reactable(t1, defaultPageSize = 15, filterable = T, searchable = T)
+t2 <- DT::datatable(t1, extensions = "Buttons", options = list(paging = T,
+                                                               scrollX = T,
+                                                               lengthMenu = c(15, 30, 50, 100),
+                                                               pageLength = 15,
+                                                               autoWidth = T,
+                                                               searching = T,
+                                                               ordering = T,
+                                                               dom = "Bfrtip",
+                                                               buttons = c("csv", "excel"))) %>%
+  DT::formatCurrency("ACRES", currency = "", interval = 3, mark = ",", digits = 0)
+
 t2
 ```
 
