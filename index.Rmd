@@ -296,7 +296,7 @@ Are there any ecosystems that might be close to disappearing completely?
 **DISCLAIMER:**
 Changes may be due to 'real' changes on the ground, or may be due to differences in mapping methods between the past and present datasets.  
 
-The map only depicts Agricultural and Developed land cover types.  Map may be downloaded [here](https://github.com/rswaty/mi_ecosystems-main/blob/main/conversion.png)
+The map only depicts Agricultural and Developed land cover types.  Map may be downloaded [here]([https://github.com/rswaty/mi_ecosystems-main/blob/main/conversion.png](https://raw.githubusercontent.com/rswaty/mi_ecosystems-main/main/conversion.png))
 
 
 
